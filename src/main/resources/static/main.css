@@ -1,0 +1,13 @@
+@font-face {
+    font-family: MCFont;
+    src: url(minecrafter/Minecrafter.Reg.ttf);
+}
+
+html {
+    background-color: #8FCA5C;
+}
+
+#content_placeholder {
+    font-family: MCFont;
+    font-size: 24px;
+}
