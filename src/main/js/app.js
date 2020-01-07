@@ -2,6 +2,18 @@ const React = require('react');
 const ReactDOM = require('react-dom');
 const client = require('./client');
 
+import {
+    Route,
+    NavLink,
+    HashRouter
+} from "react-router-dom";
+
+import Home from "./pages/Home"
+import Reservations from "./pages/Reservations"
+import Restaurant from "./pages/Restaurant"
+import MeetingsAndEvents from "./pages/MeetingsAndEvents";
+import RoomsAndApartments from "./pages/RoomsAndApartments";
+
 class App extends React.Component {
 
     constructor(props) {
@@ -17,7 +29,26 @@ class App extends React.Component {
 
     render() {
         return (
-            <ReservationList reservations={this.state.reservations}/>
+            <HashRouter>
+                <div>
+                    <header>Redsonte Hotel</header>
+                    <ul className="header">
+                        <li><NavLink to="/">Home</NavLink></li>
+                        <li><NavLink to="/restaurant">Restaurant</NavLink></li>
+                        <li><NavLink to="/reservations">Reservation</NavLink></li>
+                        <li><NavLink to="/meetings_and_events">Meetings And Events</NavLink></li>
+                        <li><NavLink to="/rooms_and_apartments">Rooms And Apartment</NavLink></li>
+                    </ul>
+                    <div className="content">
+                        <Route exact path="/" component={Home}/>
+                        <Route path="/restaurant" component={Restaurant}/>
+                        <Route path="/reservations" component={Reservations}/>
+                        <Route path="/meetings_and_events" component={MeetingsAndEvents}/>
+                        <Route path="/rooms_and_apartments" component={RoomsAndApartments}/>
+                    </div>
+                    <footer>Redstone Hotel, Overload (1200, 68, -550)</footer>
+                </div>
+            </HashRouter>
         )
     }
 }

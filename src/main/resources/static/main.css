@@ -1,13 +1,62 @@
 @font-face {
-    font-family: MCFont;
+    font-family: mcfont-logo;
     src: url(minecrafter/Minecrafter.Reg.ttf);
 }
 
-html {
-    background-color: #8FCA5C;
+@font-face {
+    font-family: mcfont;
+    src: url(Minecraft.ttf);
 }
 
-#content_placeholder {
-    font-family: MCFont;
-    font-size: 24px;
+body {
+    background-color: #8FCA5C;
+    padding: 20px;
+    margin: 0;
+}
+
+header {
+    font-family: mcfont-logo;
+    font-size: 48px;
+}
+
+header img {
+    height: 48px;
+    width: auto;
+}
+
+h1, h2, p, ul, li {
+    font-family: mcfont;
+}
+
+ul.header li {
+    display: inline;
+    list-style-type: none;
+    margin: 0;
+}
+
+ul.header {
+    background-color: #111;
+    padding: 0;
+}
+
+ul.header li a {
+    color: #FFF;
+    font-weight: bold;
+    text-decoration: none;
+    padding: 20px;
+    display: inline-block;
+}
+
+.content {
+    background-color: #FFF;
+    padding: 20px;
+}
+
+.content h2 {
+    padding: 0;
+    margin: 0;
+}
+
+.content li {
+    margin-bottom: 10px;
 }
