@@ -46,7 +46,10 @@ class App extends React.Component {
                         <Route path="/meetings_and_events" component={MeetingsAndEvents}/>
                         <Route path="/rooms_and_apartments" component={RoomsAndApartments}/>
                     </div>
-                    <footer>Redstone Hotel, Overload (1200, 68, -550)</footer>
+                    <footer>
+                        Redstone Hotel, Overload (1200, 68, -550)<br/>
+                        mkondratek (c)
+                    </footer>
                 </div>
             </HashRouter>
         )
