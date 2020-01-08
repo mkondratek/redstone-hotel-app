@@ -13,14 +13,19 @@
     src: url(MinecraftPe-rayB.ttf);
 }
 
+html {
+    position: relative;
+    min-height: 100%;
+}
+
 body {
-    background-color: #3bc1ed;
     margin: 0;
 }
 
 header {
     font-family: mcfont-logo;
     font-size: 48px;
+    text-align: center;
 }
 
 header img {
@@ -29,26 +34,34 @@ header img {
 }
 
 h1, h2, p, ul, li {
-    font-family: mcfont;
+    font-family: Verdana, serif;
 }
 
 ul.header li {
+    font-family: mcfont;
     display: inline;
     list-style-type: none;
     margin: 0;
 }
 
 ul.header {
-    background-color: #111;
+    background-color: #333;
     padding: 0;
+    text-align: center;
 }
 
+
 ul.header li a {
-    color: #FFF;
     font-weight: bold;
     text-decoration: none;
     padding: 20px;
     display: inline-block;
+    color: #FFF;
+}
+
+ul.header li a:hover {
+    height: 100%;
+    background-color: black;
 }
 
 .content {
@@ -56,7 +69,7 @@ ul.header li a {
     padding: 20px;
     letter-spacing: 3px;
     font-size: 22px;
-    margin: 12px;
+    margin: 64px 16px;
 }
 
 .content h2 {
@@ -68,22 +81,30 @@ ul.header li a {
     margin-bottom: 10px;
 }
 
-footer{
-    background: linear-gradient(0deg, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0.1)), url("Bedrock.png");
+footer {
+    background: linear-gradient(0deg, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0.2)), url("Bedrock.png");
     background-repeat: repeat;
-    background-size: 36px;
+    background-size: 48px;
 
-    font-size: 24px;
-    font-family: mcfont-pe;
-    color: #eee;
-    text-shadow: 2px 2px 4px #111;
+    font-size: 16px;
+    font-family: Verdana, serif;
+    color: #FFF;
+    text-shadow: 2px 2px 4px #000;
     text-align: center;
-    font-weight: bold;
     vertical-align: center;
-    letter-spacing: 4px;
+    letter-spacing: 3px;
 
-    width:100%;
-    padding-top: 12px;
-    height: 50px;
-    margin-top: -48px;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 64px;
+    width: 100%;
+    padding: 8px;
+    box-sizing: border-box;
+    object-fit: cover;
+}
+
+.parallax-window {
+    min-height: 400px;
+    background: transparent;
 }

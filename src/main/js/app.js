@@ -39,6 +39,7 @@ class App extends React.Component {
                         <li><NavLink to="/meetings_and_events">Meetings And Events</NavLink></li>
                         <li><NavLink to="/rooms_and_apartments">Rooms And Apartment</NavLink></li>
                     </ul>
+                    <div className="parallax-window" data-parallax="scroll" speed="-0.2" data-src="Sky.png"></div>
                     <div className="content">
                         <Route exact path="/" component={Home}/>
                         <Route path="/restaurant" component={Restaurant}/>
