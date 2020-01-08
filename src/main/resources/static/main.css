@@ -26,6 +26,7 @@ header {
     font-family: mcfont-logo;
     font-size: 48px;
     text-align: center;
+    padding-top: 32px;
 }
 
 header img {
@@ -69,7 +70,7 @@ ul.header li a:hover {
     padding: 20px;
     letter-spacing: 3px;
     font-size: 22px;
-    margin: 64px 16px;
+    margin: 64px;
 }
 
 .content h2 {
