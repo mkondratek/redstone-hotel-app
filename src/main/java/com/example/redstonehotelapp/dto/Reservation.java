@@ -1,27 +1,35 @@
 package com.example.redstonehotelapp.dto;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.Objects;
 
 @Entity
 public class Reservation {
+    //todo lombok
 
     private @Id
     @GeneratedValue
     Long id;
     private String firstName;
     private String lastName;
+    private LocalDate from;
+    private LocalDate to;
     private String description;
+
+    @Id
+    private Long roomId;
 
     public Reservation() {
     }
 
-    public Reservation(String firstName, String lastName, String description) {
+    public Reservation(String firstName, String lastName, LocalDate from, LocalDate to, String description, Long roomId) {
         this.firstName = firstName;
         this.lastName = lastName;
+        this.from = from;
+        this.to = to;
         this.description = description;
+        this.roomId = roomId;
     }
 
     @Override
@@ -32,7 +40,10 @@ public class Reservation {
         return Objects.equals(id, reservation.id) &&
                 Objects.equals(firstName, reservation.firstName) &&
                 Objects.equals(lastName, reservation.lastName) &&
-                Objects.equals(description, reservation.description);
+                Objects.equals(from, reservation.from) &&
+                Objects.equals(to, reservation.to) &&
+                Objects.equals(description, reservation.description) &&
+                Objects.equals(roomId, reservation.roomId);
     }
 
     @Override
