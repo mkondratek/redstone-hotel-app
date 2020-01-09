@@ -1,10 +1,13 @@
 import React, {Component} from "react";
+import {Parallax} from "react-scroll-parallax/cjs";
 
 class RoomsAndApartments extends Component {
     render() {
         return (
-            <div>
-                <div className="parallax-window" data-parallax="scroll" data-src="parallaxImgs/Sky.png"></div>
+            <div>//todo make paralax banners
+                <Parallax y={[-20, 20]} tagOuter="figure">
+                    <img className="parallaxImg" src="parallaxImgs/Night.png"/>
+                </Parallax>
                 <div className="content">
                     <h2>Rooms And Apartments</h2>
                     <p>Cras facilisis urna ornare ex volutpat, et
@@ -16,6 +19,9 @@ class RoomsAndApartments extends Component {
 
                     <p>Duis a turpis sed lacus dapibus elementum sed eu lectus.</p>
                 </div>
+                <Parallax y={[-20, 20]} tagOuter="figure">
+                    <img className="parallaxImg" src="parallaxImgs/Underground.png"/>
+                </Parallax>
             </div>
         );
     }

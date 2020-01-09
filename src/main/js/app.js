@@ -1,3 +1,5 @@
+import {ParallaxProvider} from "react-scroll-parallax/cjs";
+
 const React = require('react');
 const ReactDOM = require('react-dom');
 const client = require('./client');
@@ -39,13 +41,13 @@ class App extends React.Component {
                         <li><NavLink to="/meetings_and_events">Meetings And Events</NavLink></li>
                         <li><NavLink to="/rooms_and_apartments">Rooms And Apartment</NavLink></li>
                     </ul>
-                    <div className="wrapper">
+                    <ParallaxProvider className="wrapper">
                         <Route exact path="/" component={Home}/>
                         <Route path="/restaurant" component={Restaurant}/>
                         <Route path="/reservations" component={Reservations}/>
                         <Route path="/meetings_and_events" component={MeetingsAndEvents}/>
                         <Route path="/rooms_and_apartments" component={RoomsAndApartments}/>
-                    </div>
+                    </ParallaxProvider>
                     <footer>
                         Redstone Hotel, Overload (1200, 68, -550)<br/>
                         mkondratek (c)
