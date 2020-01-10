@@ -4,6 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDate;
+
 @Component
 public class DatabaseLoader implements CommandLineRunner {
 
@@ -16,6 +18,6 @@ public class DatabaseLoader implements CommandLineRunner {
 
     @Override
     public void run(String... strings) {
-        this.repository.save(new Reservation("Tomasz", "Jestrzębski", "wyjazd służbowy"));
+//        this.repository.save(new Reservation("Tomasz", "Jestrzębski", LocalDate.now(), LocalDate.now(), "wyjazd służbowy", 0l));
     }
 }

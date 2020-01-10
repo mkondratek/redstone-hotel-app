@@ -1,35 +1,49 @@
 package com.example.redstonehotelapp.dto;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.Objects;
 
 @Entity
+@AllArgsConstructor
 public class Reservation {
-    //todo lombok
 
-    private @Id
+    @Getter
+    @Setter
+    @Id
     @GeneratedValue
-    Long id;
+    private Long id;
+
+    @Getter
+    @Setter
     private String firstName;
+
+    @Getter
+    @Setter
     private String lastName;
-    private LocalDate from;
-    private LocalDate to;
+
+    @Getter
+    @Setter
+    private LocalDate fromDate;
+
+    @Getter
+    @Setter
+    private LocalDate toDate;
+
+    @Getter
+    @Setter
     private String description;
 
-    @Id
-    private Long roomId;
+//    @Getter
+//    @Setter
+//    @Id
+//    private Long roomId; todo
 
     public Reservation() {
-    }
-
-    public Reservation(String firstName, String lastName, LocalDate from, LocalDate to, String description, Long roomId) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.from = from;
-        this.to = to;
-        this.description = description;
-        this.roomId = roomId;
     }
 
     @Override
@@ -40,48 +54,15 @@ public class Reservation {
         return Objects.equals(id, reservation.id) &&
                 Objects.equals(firstName, reservation.firstName) &&
                 Objects.equals(lastName, reservation.lastName) &&
-                Objects.equals(from, reservation.from) &&
-                Objects.equals(to, reservation.to) &&
-                Objects.equals(description, reservation.description) &&
-                Objects.equals(roomId, reservation.roomId);
+                Objects.equals(fromDate, reservation.fromDate) &&
+                Objects.equals(toDate, reservation.toDate) &&
+                Objects.equals(description, reservation.description);
+//        && Objects.equals(roomId, reservation.roomId); todo
     }
 
     @Override
     public int hashCode() {
-
-        return Objects.hash(id, firstName, lastName, description);
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
+        return Objects.hash(id, firstName, lastName, fromDate, toDate, description);
     }
 
     @Override

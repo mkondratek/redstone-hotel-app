@@ -4,3 +4,11 @@ spring:
       base-path: /api
   profiles:
     active: dev
+
+logging:
+  level:
+    org:
+      springframework:
+        web: DEBUG
+
+      hibernate: ERROR

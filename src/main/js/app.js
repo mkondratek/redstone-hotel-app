@@ -48,6 +48,7 @@ class App extends React.Component {
                         <Route path="/meetings_and_events" component={MeetingsAndEvents}/>
                         <Route path="/rooms_and_apartments" component={RoomsAndApartments}/>
                     </ParallaxProvider>
+                    <div className="verticalSpace"></div>
                     <footer>
                         Redstone Hotel, Overload (1200, 68, -550)<br/>
                         mkondratek (c)

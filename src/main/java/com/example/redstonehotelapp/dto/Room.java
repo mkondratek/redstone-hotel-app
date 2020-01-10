@@ -1,23 +1,24 @@
 package com.example.redstonehotelapp.dto;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import java.util.Objects;
 
 @Entity
+@AllArgsConstructor
 public class Room {
 
-    private @Id
-    @GeneratedValue
-    Long id;
-    private String description;
+    @Getter
+    @Setter
+    @Id @GeneratedValue private Long id;
+    @Getter @Setter private String description;
 
     public Room() {
-    }
-
-    public Room(String description) {
-        this.description = description;
     }
 
     @Override
@@ -31,24 +32,7 @@ public class Room {
 
     @Override
     public int hashCode() {
-
         return Objects.hash(id, description);
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
     }
 
     @Override

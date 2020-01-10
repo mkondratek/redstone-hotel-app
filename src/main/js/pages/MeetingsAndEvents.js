@@ -1,13 +1,11 @@
 import React, {Component} from "react";
-import {Parallax} from "react-scroll-parallax/cjs";
+import {RegularParallax} from "../util/RegularParallax";
 
 class MeetingsAndEvents extends Component {
     render() {
         return (
             <div>
-                <Parallax y={[-20, 20]} tagOuter="figure">
-                    <img className="parallaxImg" src="parallaxImgs/Morning.png"/>
-                </Parallax>
+                <RegularParallax src="parallaxImgs/Morning.png"/>
                 <div className="content">
                     <h2>Meetings And Events</h2>
                     <p>Cras facilisis urna ornare ex volutpat, et
@@ -19,9 +17,7 @@ class MeetingsAndEvents extends Component {
 
                     <p>Duis a turpis sed lacus dapibus elementum sed eu lectus.</p>
                 </div>
-                <Parallax y={[-20, 20]} tagOuter="figure">
-                    <img className="parallaxImg" src="parallaxImgs/Party.png"/>
-                </Parallax>
+                <RegularParallax src="parallaxImgs/Party.png"/>
             </div>
         );
     }
