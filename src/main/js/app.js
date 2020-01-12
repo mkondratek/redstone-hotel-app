@@ -33,7 +33,11 @@ class App extends React.Component {
         return (
             <HashRouter>
                 <div>
-                    <header>Redsonte Hotel</header>
+                    <header>
+                        <div className="icon"></div>
+                        Redsonte Hotel
+                        <div className="icon"></div>
+                    </header>
                     <ul className="header">
                         <li><NavLink to="/">Home</NavLink></li>
                         <li><NavLink to="/restaurant">Restaurant</NavLink></li>

@@ -114,3 +114,12 @@ footer {
 .verticalSpace {
     height: 100px;
 }
+
+.icon {
+    background-image: url("Redstone.png");
+    height: 36px;
+    width: 36px;
+    background-size: 36px auto;
+    display: inline-block;
+    margin: 2px 10px;
+}

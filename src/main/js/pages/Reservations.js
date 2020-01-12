@@ -7,21 +7,35 @@ import "../../../../node_modules/react-datepicker/dist/react-datepicker.css";
 class Reservations extends Component {
     constructor(props) {
         super(props);
-        let now = new Date();
+        const today = new Date();
+        const tommorow = new Date();
+        tommorow.setDate(tommorow.getDate() + 1);
         this.state = {
-            startDate: now,
-            endDate: now
+            startDate: today,
+            endDate: tommorow
         }
     }
 
     setStartDate(date) {
-        const newEndDate = this.state.endDate < date ? date : this.state.endDate;
+        const newEndDate = this.state.endDate;
+        if (newEndDate.getDate() <= date.getDate()) {
+            newEndDate.setDate(date.getDate() + 1);
+        }
         this.setState({startDate: date, endDate: newEndDate});
     }
 
     setEndDate(date) {
-        const newStartDate = this.state.startDate > date ? date : this.state.startDate;
-        this.setState({startDate: newStartDate, endDate: date});
+        const newStartDate = this.state.startDate;
+        if (newStartDate.getDate() >= date.getDate()) {
+            newStartDate.setDate(date.getDate() - 1)
+        }
+        if (newStartDate.getDate() < new Date().getDate()) {
+            newStartDate.setDate(newStartDate.getDate() + 1);
+            date.setDate(date.getDate() + 1);
+            this.setState({startDate: newStartDate, endDate: date});
+        } else {
+            this.setState({startDate: newStartDate, endDate: date});
+        }
     }
 
     render() {
@@ -51,23 +65,24 @@ class Reservations extends Component {
                         </select>
                         </label><br/>
                         <label>
-                            Date:
-                            <DatePicker
-                                selected={startDate}
-                                onChange={date => this.setStartDate(date)}
-                                selectsStart
-                                startDate={startDate}
-                                endDate={endDate}
-                                minDate={Date.now()}
-                            />
-                            <DatePicker
-                                selected={endDate}
-                                onChange={date => this.setEndDate(date)}
-                                selectsEnd
-                                startDate={startDate}
-                                endDate={endDate}
-                                minDate={startDate}
-                            />
+                            From: <DatePicker
+                            selected={startDate}
+                            onChange={date => this.setStartDate(date)}
+                            selectsStart
+                            startDate={startDate}
+                            endDate={endDate}
+                            minDate={Date.now()}
+                        />
+                        </label><br/>
+                        <label>
+                            To: <DatePicker
+                            selected={endDate}
+                            onChange={date => this.setEndDate(date)}
+                            selectsEnd
+                            startDate={startDate}
+                            endDate={endDate}
+                            minDate={startDate}
+                        />
                         </label><br/>
                         <input type="submit" value="Reserve"/>
                     </form>
