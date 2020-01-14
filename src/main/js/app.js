@@ -40,14 +40,18 @@ class App extends React.Component {
                     </header>
                     <ul className="header">
                         <li><NavLink to="/">Home</NavLink></li>
-                        <li><NavLink to="/restaurant">Restaurant</NavLink></li>
+                        <li id="restaurant"><NavLink to="/restaurant">Restaurant</NavLink>
+                            <ul className="dropdown">
+                                <li><NavLink to="/restaurant">Regular menu</NavLink></li>
+                                <li><NavLink to="/restaurant/true">Vegetarian menu</NavLink></li>
+                            </ul></li>
                         <li><NavLink to="/reservations">Reservation</NavLink></li>
                         <li><NavLink to="/meetings_and_events">Meetings And Events</NavLink></li>
                         <li><NavLink to="/rooms_and_apartments">Rooms And Apartment</NavLink></li>
                     </ul>
                     <ParallaxProvider className="wrapper">
                         <Route exact path="/" component={Home}/>
-                        <Route path="/restaurant" component={Restaurant}/>
+                        <Route path="/restaurant/:vegetarian?" component={Restaurant}/>
                         <Route path="/reservations" component={Reservations}/>
                         <Route path="/meetings_and_events" component={MeetingsAndEvents}/>
                         <Route path="/rooms_and_apartments" component={RoomsAndApartments}/>

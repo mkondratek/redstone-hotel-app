@@ -37,6 +37,11 @@ class Restaurant extends Component {
 
     render() {
         const {data} = this.state;
+        const {vegetarian} = this.props.match.params;
+        const defaultFilter = {
+            id: "over",
+            value: vegetarian === "true" ? "true" : "all"
+        };
         return (
             <div>
                 <RegularParallax src="parallaxImgs/Supper.png"/>
@@ -46,17 +51,16 @@ class Restaurant extends Component {
                         much more. Check our menu!</p>
 
                     <ReactTable
-
                         data={data}
                         filterable
                         sortable
+                        defaultFiltered={[defaultFilter]}
                         columns={[
                             {
                                 Header: "Dish Name",
                                 accessor: "dishName",
                                 filterMethod: (filter, row) =>
-                                    row[filter.id].startsWith(filter.value) &&
-                                    row[filter.id].endsWith(filter.value)
+                                    row[filter.id].includes(filter.value)
                             },
                             {
                                 Header: "Price",
@@ -69,7 +73,7 @@ class Restaurant extends Component {
                                 Cell: ({value}) => (value ? "Vegetarian" : "Regular"),
                                 filterMethod: (filter, row) => {
                                     if (filter.value === "true") {
-                                        return row[filter.id] === true;
+                                        return row[filter.id];
                                     }
 
                                     return true;
@@ -78,8 +82,7 @@ class Restaurant extends Component {
                                     <select
                                         onChange={event => onChange(event.target.value)}
                                         style={{width: "100%"}}
-                                        value={filter ? filter.value : "all"}
-                                    >
+                                        value={filter ? filter.value : "all"}>
                                         <option value="all">Show All</option>
                                         <option value="true">Vegetarian</option>
                                     </select>
