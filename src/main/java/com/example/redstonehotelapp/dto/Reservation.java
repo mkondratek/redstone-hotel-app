@@ -1,15 +1,18 @@
 package com.example.redstonehotelapp.dto;
 
 import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import java.time.LocalDate;
-import java.util.Objects;
 
 @Entity
 @AllArgsConstructor
+@EqualsAndHashCode
 public class Reservation {
 
     @Getter
@@ -36,42 +39,12 @@ public class Reservation {
 
     @Getter
     @Setter
-    private String description;
+    private String comments;
 
-//    @Getter
-//    @Setter
-//    @Id
-//    private Long roomId; todo
+    @Getter
+    @Setter
+    private String roomId;
 
     public Reservation() {
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Reservation reservation = (Reservation) o;
-        return Objects.equals(id, reservation.id) &&
-                Objects.equals(firstName, reservation.firstName) &&
-                Objects.equals(lastName, reservation.lastName) &&
-                Objects.equals(fromDate, reservation.fromDate) &&
-                Objects.equals(toDate, reservation.toDate) &&
-                Objects.equals(description, reservation.description);
-//        && Objects.equals(roomId, reservation.roomId); todo
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, firstName, lastName, fromDate, toDate, description);
-    }
-
-    @Override
-    public String toString() {
-        return "Reservation{" +
-                "id=" + id +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", description='" + description + '\'' +
-                '}';
     }
 }

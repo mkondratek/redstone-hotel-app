@@ -3,43 +3,63 @@ import {RegularParallax} from "../util/RegularParallax";
 import DatePicker from "react-datepicker";
 
 import "../../../../node_modules/react-datepicker/dist/react-datepicker.css";
+const client = require('../client');
 
 class Reservations extends Component {
     constructor(props) {
         super(props);
         const today = new Date();
-        const tommorow = new Date();
-        tommorow.setDate(tommorow.getDate() + 1);
+        const tomorrow = new Date();
+        tomorrow.setDate(tomorrow.getDate() + 1);
+
         this.state = {
-            startDate: today,
-            endDate: tommorow
-        }
+            firstName: "",
+            lastName: "",
+            roomId: "ra",
+            fromDate: today,
+            toDate: tomorrow
+        };
+
+        this.handleChange = this.handleChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
     }
 
-    setStartDate(date) {
-        const newEndDate = this.state.endDate;
-        if (newEndDate.getDate() <= date.getDate()) {
-            newEndDate.setDate(date.getDate() + 1);
+    setFromDate(date) {
+        const newToDate = this.state.toDate;
+        if (newToDate.getDate() <= date.getDate()) {
+            newToDate.setDate(date.getDate() + 1);
         }
-        this.setState({startDate: date, endDate: newEndDate});
+        this.setState({fromDate: date, toDate: newToDate});
     }
 
-    setEndDate(date) {
-        const newStartDate = this.state.startDate;
-        if (newStartDate.getDate() >= date.getDate()) {
-            newStartDate.setDate(date.getDate() - 1)
+    setToDate(date) {
+        const newFromDate = this.state.fromDate;
+        if (newFromDate.getDate() >= date.getDate()) {
+            newFromDate.setDate(date.getDate() - 1)
         }
-        if (newStartDate.getDate() < new Date().getDate()) {
-            newStartDate.setDate(newStartDate.getDate() + 1);
+        if (newFromDate.getDate() < new Date().getDate()) {
+            newFromDate.setDate(newFromDate.getDate() + 1);
             date.setDate(date.getDate() + 1);
-            this.setState({startDate: newStartDate, endDate: date});
-        } else {
-            this.setState({startDate: newStartDate, endDate: date});
         }
+        this.setState({fromDate: newFromDate, toDate: date});
+    }
+
+    handleSubmit(event) {
+        client({method: 'POST', path: '/api/reservations', headers: {'Content-Type': 'application/json'}, entity: this.state}).done(response => {
+            console.log(response); //todo redirect to home
+        });
+
+        event.preventDefault();
+    }
+
+    handleChange(event) {
+        this.setState({
+            [event.target.name]: event.target.value
+        });
     }
 
     render() {
-        const {startDate, endDate} = this.state;
+        const {fromDate, toDate} = this.state;
         return (
             <div>
                 <RegularParallax src="parallaxImgs/Enchant.png"/>
@@ -49,15 +69,15 @@ class Reservations extends Component {
                         an ideal place to gather the team for further journey. Our professional service is ready to
                         serve you. <i>Reserve now.</i></p>
 
-                    <form>
+                    <form onSubmit={this.handleSubmit}>
                         <label>
-                            Name: <input type="text" name="name"/>
+                            Name: <input type="text" name="firstName" onChange={this.handleChange}/>
                         </label><br/>
                         <label>
-                            Surname: <input type="text" name="surname"/>
+                            Surname: <input type="text" name="lastName" onChange={this.handleChange}/>
                         </label><br/>
                         <label>
-                            Room: <select>
+                            Room: <select name="roomId" onChange={this.handleChange}>
                             <option value="ra">Room A</option>
                             <option value="rb">Room B</option>
                             <option value="rc">Room C</option>
@@ -66,23 +86,26 @@ class Reservations extends Component {
                         </label><br/>
                         <label>
                             From: <DatePicker
-                            selected={startDate}
-                            onChange={date => this.setStartDate(date)}
+                            selected={fromDate}
+                            onChange={date => this.setFromDate(date)}
                             selectsStart
-                            startDate={startDate}
-                            endDate={endDate}
+                            startDate={fromDate}
+                            endDate={toDate}
                             minDate={Date.now()}
                         />
                         </label><br/>
                         <label>
                             To: <DatePicker
-                            selected={endDate}
-                            onChange={date => this.setEndDate(date)}
+                            selected={toDate}
+                            onChange={date => this.setToDate(date)}
                             selectsEnd
-                            startDate={startDate}
-                            endDate={endDate}
-                            minDate={startDate}
+                            startDate={fromDate}
+                            endDate={toDate}
+                            minDate={fromDate}
                         />
+                        </label><br/>
+                        <label>
+                            Additional comments: <textarea name='comments' onChange={this.handleChange}/>
                         </label><br/>
                         <input type="submit" value="Reserve"/>
                     </form>
