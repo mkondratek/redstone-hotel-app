@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 
-const client = require('../client');
+const superagent = require('superagent');
 
 export class RandomQuote extends Component {
     constructor(props) {
@@ -16,12 +16,13 @@ export class RandomQuote extends Component {
     }
 
     updateQuote() {
-        client({method: 'GET', path: 'https://api.quotable.io/random'}).done(response => {
-            this.setState({
-                content: response.entity.content,
-                author: response.entity.author
+        superagent.get('https://api.quotable.io/random')
+            .then(res => {
+                this.setState({
+                    content: res.body.content,
+                    author: res.body.author
+                });
             });
-        });
     }
 
     render() {

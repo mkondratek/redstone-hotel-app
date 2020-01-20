@@ -10,7 +10,7 @@ export class RegularParallax extends Component {
             }]}
 
             style={{
-                height: '400px'
+                height: '330px'
             }}
         />);
     }

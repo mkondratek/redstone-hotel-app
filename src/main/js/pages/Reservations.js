@@ -1,9 +1,10 @@
 import React, {Component} from "react";
 import {RegularParallax} from "../util/RegularParallax";
 import DatePicker from "react-datepicker";
-
 import "../../../../node_modules/react-datepicker/dist/react-datepicker.css";
-const client = require('../client');
+import {Redirect} from "react-router-dom";
+
+const superagent = require('superagent');
 
 class Reservations extends Component {
     constructor(props) {
@@ -15,13 +16,22 @@ class Reservations extends Component {
         this.state = {
             firstName: "",
             lastName: "",
-            roomId: "ra",
+            roomId: "",
             fromDate: today,
-            toDate: tomorrow
+            toDate: tomorrow,
+            rooms: [],
+            redirectToHome: false
         };
 
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+    }
+
+    componentDidMount() {
+        superagent.get('/api/rooms')
+            .then(res => {
+                this.setState({rooms: res.body._embedded.rooms.map(r => r.name)})
+            });
     }
 
     setFromDate(date) {
@@ -45,8 +55,13 @@ class Reservations extends Component {
     }
 
     handleSubmit(event) {
-        client({method: 'POST', path: '/api/reservations', headers: {'Content-Type': 'application/json'}, entity: this.state}).done(response => {
-            console.log(response); //todo redirect to home
+        superagent.post('/reservation')
+            .set('Content-Type', 'application/json')
+            .send(this.state)
+            .then(() => {
+                this.setState({redirectToHome: true})
+            }).catch(err => {
+            alert(err.message);
         });
 
         event.preventDefault();
@@ -59,7 +74,14 @@ class Reservations extends Component {
     }
 
     render() {
-        const {fromDate, toDate} = this.state;
+        const {fromDate, toDate, redirectToHome} = this.state;
+
+        if (redirectToHome === true) {
+            return <Redirect to="/"/>
+        }
+
+        const options = this.state.rooms.map(n => <option value={n}>{n}</option>);
+
         return (
             <div>
                 <RegularParallax src="parallaxImgs/Enchant.png"/>
@@ -70,44 +92,61 @@ class Reservations extends Component {
                         serve you. <i>Reserve now.</i></p>
 
                     <form onSubmit={this.handleSubmit}>
-                        <label>
-                            Name: <input type="text" name="firstName" onChange={this.handleChange}/>
-                        </label><br/>
-                        <label>
-                            Surname: <input type="text" name="lastName" onChange={this.handleChange}/>
-                        </label><br/>
-                        <label>
-                            Room: <select name="roomId" onChange={this.handleChange}>
-                            <option value="ra">Room A</option>
-                            <option value="rb">Room B</option>
-                            <option value="rc">Room C</option>
-                            <option value="rd">Room D</option>
-                        </select>
-                        </label><br/>
-                        <label>
-                            From: <DatePicker
-                            selected={fromDate}
-                            onChange={date => this.setFromDate(date)}
-                            selectsStart
-                            startDate={fromDate}
-                            endDate={toDate}
-                            minDate={Date.now()}
-                        />
-                        </label><br/>
-                        <label>
-                            To: <DatePicker
-                            selected={toDate}
-                            onChange={date => this.setToDate(date)}
-                            selectsEnd
-                            startDate={fromDate}
-                            endDate={toDate}
-                            minDate={fromDate}
-                        />
-                        </label><br/>
-                        <label>
-                            Additional comments: <textarea name='comments' onChange={this.handleChange}/>
-                        </label><br/>
-                        <input type="submit" value="Reserve"/>
+                        <p>
+
+                            <label>
+                                Name: <input type="text" name="firstName"
+                                             onChange={this.handleChange}/>
+                            </label>
+                        </p>
+                        <p>
+
+                            <label>
+                                Surname: <input type="text" name="lastName"
+                                                onChange={this.handleChange}/>
+                            </label>
+                        </p>
+                        <p>
+                            <label>
+                                Room: <select name="roomId" onChange={this.handleChange}>
+                                {options}
+                            </select>
+                            </label>
+                        </p>
+                        <p>
+                            <label>
+                                From: <DatePicker
+                                selected={fromDate}
+                                onChange={date => this.setFromDate(date)}
+                                selectsStart
+                                startDate={fromDate}
+                                endDate={toDate}
+                                minDate={Date.now()}
+                            />
+                            </label>
+                        </p>
+                        <p>
+                            <label>
+                                To: <DatePicker
+                                selected={toDate}
+                                onChange={date => this.setToDate(date)}
+                                selectsEnd
+                                startDate={fromDate}
+                                endDate={toDate}
+                                minDate={fromDate}
+                            />
+                            </label>
+                        </p>
+                        <p>
+                            <label>
+                                Comments: <textarea name='comments' onChange={this.handleChange}/>
+                            </label>
+                        </p>
+                        <p id="submit">
+                            <label>
+                                <input type="submit" value="Reserve"/>
+                            </label>
+                        </p>
                     </form>
 
                     <p>We look forward to your presence.</p>
