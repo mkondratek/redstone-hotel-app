@@ -28,9 +28,9 @@ class Reservations extends Component {
     }
 
     componentDidMount() {
-        superagent.get('/api/rooms')
+        superagent.get('/room/names')
             .then(res => {
-                this.setState({rooms: res.body._embedded.rooms.map(r => r.name)})
+                this.setState({rooms: res.body})
             });
     }
 
@@ -77,10 +77,12 @@ class Reservations extends Component {
         const {fromDate, toDate, redirectToHome} = this.state;
 
         if (redirectToHome === true) {
-            return <Redirect to="/"/>
+            window.scrollTo(0, 0);
+            alert("Success!");
+            return <Redirect to="/"/>;
         }
 
-        const options = this.state.rooms.map(n => <option value={n}>{n}</option>);
+        const options = this.state.rooms.map(n => <option key={n} value={n}>{n}</option>);
 
         return (
             <div>

@@ -13,9 +13,9 @@ class Rooms extends Component {
     }
 
     componentDidMount() {
-        superagent.get('/api/rooms')
+        superagent.get('/room')
             .then(res => {
-                this.setState({rooms: res.body._embedded.rooms})
+                this.setState({rooms: res.body})
             });
     }
 
@@ -60,7 +60,7 @@ class RoomList extends React.Component {
 
 class Room extends React.Component {
     render() {
-        const url = "http://localhost:8080/api/rooms/image/" + this.props.id;
+        const url = "http://localhost:8080/room/image/" + this.props.id;
         return (
             <tr>
                 <td><img className="preview" src={url}/></td>

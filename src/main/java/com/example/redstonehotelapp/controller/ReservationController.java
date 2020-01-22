@@ -23,7 +23,7 @@ public class ReservationController {
     }
 
     @PostMapping("/reservation")
-    public ResponseEntity postReservation(@RequestBody Reservation reservation) {
+    public ResponseEntity makeReservation(@RequestBody Reservation reservation) {
         boolean isRoomAvailable = roomAvailabilityValidator.validate(repository.findAll(), reservation);
         if (isRoomAvailable) {
             repository.save(reservation);

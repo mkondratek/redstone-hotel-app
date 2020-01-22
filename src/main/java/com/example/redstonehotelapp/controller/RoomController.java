@@ -12,10 +12,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.io.IOException;
+import java.util.Collections;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 @RestController
-@RequestMapping("/api/rooms")
+@RequestMapping("/room")
 public class RoomController {
 
     final RoomRepository repository;
@@ -36,4 +40,19 @@ public class RoomController {
                 .contentType(MediaType.IMAGE_JPEG)
                 .body(new InputStreamResource(imgFile.getInputStream()));
     }
+
+    @GetMapping("/names")
+    public List<String> getNames() {
+        return StreamSupport
+                .stream(repository.findAll().spliterator(), false)
+                .map(Room::getName)
+                .distinct()
+                .collect(Collectors.toList());
+    }
+
+    @GetMapping
+    public Iterable<Room> getRooms() {
+        return repository.findAll();
+    }
+
 }
