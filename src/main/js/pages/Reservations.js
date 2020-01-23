@@ -95,14 +95,12 @@ class Reservations extends Component {
 
                     <form onSubmit={this.handleSubmit}>
                         <p>
-
                             <label>
                                 Name: <input type="text" name="firstName"
                                              onChange={this.handleChange}/>
                             </label>
                         </p>
                         <p>
-
                             <label>
                                 Surname: <input type="text" name="lastName"
                                                 onChange={this.handleChange}/>
@@ -115,8 +113,7 @@ class Reservations extends Component {
                             </select>
                             </label>
                         </p>
-                        <p>
-                            <label>
+                            <label className="datePickerLabel">
                                 From: <DatePicker
                                 selected={fromDate}
                                 onChange={date => this.setFromDate(date)}
@@ -126,9 +123,7 @@ class Reservations extends Component {
                                 minDate={Date.now()}
                             />
                             </label>
-                        </p>
-                        <p>
-                            <label>
+                            <label className="datePickerLabel">
                                 To: <DatePicker
                                 selected={toDate}
                                 onChange={date => this.setToDate(date)}
@@ -138,7 +133,6 @@ class Reservations extends Component {
                                 minDate={fromDate}
                             />
                             </label>
-                        </p>
                         <p>
                             <label>
                                 Comments: <textarea name='comments' onChange={this.handleChange}/>

@@ -5,6 +5,8 @@ import namor from "namor";
 
 import "../../../../node_modules/react-table/react-table.css";
 
+const superagent = require('superagent');
+
 const range = len => {
     const arr = [];
     for (let i = 0; i < len; i++) {
@@ -31,9 +33,16 @@ class Restaurant extends Component {
     constructor() {
         super();
         this.state = {
-            data: makeData()
+            data: makeData() //todo: remove random data
         };
     }
+
+    // componentDidMount() {
+    //     superagent.get('/dish')
+    //         .then(res => {
+    //             this.setState({data: res.body})
+    //         });
+    // }
 
     render() {
         const {data} = this.state;

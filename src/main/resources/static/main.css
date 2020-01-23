@@ -157,9 +157,21 @@ p textarea {
     margin-left: 10px;
 }
 
-p .react-datepicker-wrapper {
+label .react-datepicker-wrapper {
     float: right;
     margin-left: 10px;
+}
+
+.datePickerLabel {
+    display: block;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    font-family: Verdana, serif;
+    text-align: left;
+    margin: 8px;
+
 }
 
 form p {
