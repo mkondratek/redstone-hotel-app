@@ -2,7 +2,7 @@ import React, {Component} from "react";
 import {RegularParallax} from "../util/RegularParallax";
 import DatePicker from "react-datepicker";
 import "../../../../node_modules/react-datepicker/dist/react-datepicker.css";
-import {Redirect} from "react-router-dom";
+import {Navigate} from "react-router-dom";
 
 const superagent = require('superagent');
 
@@ -79,7 +79,7 @@ class Reservations extends Component {
         if (redirectToHome === true) {
             window.scrollTo(0, 0);
             alert("Success!");
-            return <Redirect to="/"/>;
+            return <Navigate to="/"/>;
         }
 
         const options = this.state.rooms.map(n => <option key={n} value={n}>{n}</option>);

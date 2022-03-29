@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import {Parallax, ParallaxBanner} from "react-scroll-parallax/cjs";
+import {ParallaxBanner} from "react-scroll-parallax";
 
 export class RegularParallax extends Component {
     render() {

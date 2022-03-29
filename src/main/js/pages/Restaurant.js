@@ -3,7 +3,7 @@ import {RegularParallax} from "../util/RegularParallax";
 import ReactTable from "react-table";
 import namor from "namor";
 
-import "../../../../node_modules/react-table/react-table.css";
+// import "../../../../node_modules/react-table/react-table.css";
 
 const superagent = require('superagent');
 

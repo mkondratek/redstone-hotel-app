@@ -1,4 +1,4 @@
-import {ParallaxProvider} from "react-scroll-parallax/cjs";
+import {ParallaxProvider} from "react-scroll-parallax";
 import {HashRouter, NavLink, Route} from "react-router-dom";
 
 import Home from "./pages/Home"
